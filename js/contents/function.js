@@ -18,13 +18,13 @@ const FORMS = {
             return a
         },
         limit() {
-            let limit = E(10).mul(UPGS.replicanti[1].effect())
+            let limit = E(10e10000000).mul(UPGS.replicanti[1].effect())
             return limit
         },
         penalty(x = player.replicanti) {
             if (x.lt(this.limit())) return E(1)
             let a = x.logBase(this.limit())
-            a = a.add(1).pow(a).pow(this.superPenalty()).pow(this.hyperPenalty())
+            a = a.add(1).pow(decimal.div(1,a.add(10)).pow(decimal.div(1,this.superPenalty())).pow(decimal.div(1,this.hyperPenalty()))
             if (player.prestige.upgrades.includes(13)) a = a.pow(0.75)
             if (player.chals.comps.includes("inf3")) a = a.pow(0.75)
             if (CHALS.onChal("normal1") || CHALS.onChal("inf1")) a = a.pow(1.5)
